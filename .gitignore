@@ -1,0 +1,82 @@
+# ===== 凭证与私人配置（最高优先级，绝不提交）=====
+.env
+.env.*
+!.env.example
+config/settings.yaml
+config/*.local.yaml
+*.local.yaml
+
+# ===== 运行期用户数据（世界、剧情、存档、记忆）=====
+worlds/
+!worlds/.gitkeep
+
+# ===== 用户上传 / 缓存 / 日志 / 数据库 =====
+uploads/
+data/
+*.db
+*.sqlite
+*.sqlite3
+*.log
+logs/
+cache/
+.tmp/
+tmp/
+
+# ===== 模型与向量索引（默认不上传）=====
+*.gguf
+*.safetensors
+*.bin
+*.pt
+*.onnx
+# 只忽略项目根目录下的模型目录，不能误伤源码目录 backend/models/
+/models/
+model_cache/
+faiss_index/
+chroma/
+vector_store/
+embeddings/
+
+# ===== Python 运行环境与产物 =====
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+dist_python/
+build_python/
+
+# ===== Node 运行环境与产物 =====
+node_modules/
+frontend/dist/
+frontend/build/
+npm-debug.log*
+yarn-error.log*
+
+# ===== IDE / 系统本地配置 =====
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===== Notebook 检查点 =====
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# ===== 测试与覆盖率产物 =====
+.coverage
+htmlcov/
+coverage.xml
+
+# ===== 临时与备份 =====
+*.bak
+*.backup
+*.part
+*.tmp
+*$~

@@ -1,0 +1,11 @@
+# 复制为 config/settings.yaml 后即可修改；该文件已被 .gitignore 排除，不会上传。
+# 也可以在前端「设置」页里改，效果相同（后端会写回 config/settings.yaml）。
+llm:
+  provider: mock          # mock | openai_compatible
+  base_url: http://127.0.0.1:5001/v1   # 改成你自己的 OpenAI 兼容服务地址
+  model: local-model      # 改成你所用服务提供的模型名
+  api_key: ""             # 只在这里或设置页填写；切勿提交到仓库
+  temperature: 0.85
+  max_tokens: 8192
+  timeout_seconds: 300
+  mock_mode: true         # true=不连模型也能体验；准备好模型服务后改为 false

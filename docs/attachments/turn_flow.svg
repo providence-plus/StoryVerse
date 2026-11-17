@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" width="900" height="560" font-family="Microsoft YaHei, PingFang SC, Segoe UI, sans-serif">
+  <defs>
+    <marker id="af" markerWidth="9" markerHeight="9" refX="4.5" refY="4.5" orient="auto">
+      <path d="M0,0 L9,4.5 L0,9 z" fill="#8A8F96"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="900" height="560" fill="#FBFAF7"/>
+  <text x="32" y="36" font-size="21" font-weight="700" fill="#22252A">一次剧情回合的执行顺序</text>
+  <text x="32" y="57" font-size="12.5" fill="#6B6F76">【类型：流程图】展示 POST /story/turn 的先后步骤与校验关卡，箭头代表执行顺序；模块分层请看 architecture.svg 那张结构图。</text>
+
+  <!-- grid 4 x 2 -->
+  <g fill="#FFFFFF" stroke="#C9CDD2" stroke-width="1.2">
+    <rect x="32"  y="78" width="196" height="112" rx="9"/><rect x="252" y="78" width="196" height="112" rx="9"/>
+    <rect x="472" y="78" width="196" height="112" rx="9"/><rect x="692" y="78" width="176" height="112" rx="9"/>
+    <rect x="32"  y="250" width="196" height="112" rx="9"/><rect x="252" y="250" width="196" height="112" rx="9"/>
+    <rect x="472" y="250" width="196" height="112" rx="9"/><rect x="692" y="250" width="176" height="112" rx="9"/>
+  </g>
+
+  <!-- step numbers -->
+  <g fill="#1B4F8C" font-size="12" font-weight="700">
+    <text x="44" y="100">STEP 1 · 输入</text><text x="264" y="100">STEP 2 · 组装</text>
+    <text x="484" y="100">STEP 3 · 生成</text><text x="704" y="100">STEP 4 · 解析</text>
+    <text x="44" y="272">STEP 5 · 校验</text><text x="264" y="272">STEP 6 · 更新</text>
+    <text x="484" y="272">STEP 7 · 落盘</text><text x="704" y="272">STEP 8 · 响应</text>
+  </g>
+  <g fill="#33373C" font-size="10.8">
+    <text x="44" y="122">玩家点选项 / 输入自定义行动</text>
+    <text x="44" y="140">先记下玩家这一次实际做了什么</text>
+    <text x="44" y="158">识别 world_id · save_id</text>
+    <text x="44" y="176">active_character_ids</text>
+
+    <text x="264" y="122">每轮重新读 system_prompt</text>
+    <text x="264" y="140">读任务 prompt + 当前世界设定</text>
+    <text x="264" y="158">读 panels.yaml 字段定义与现值</text>
+    <text x="264" y="176">最近 8–10 轮 + summary.md</text>
+
+    <text x="484" y="122">LLM Provider 统一接口</text>
+    <text x="484" y="140">真实模型 或 Mock Provider</text>
+    <text x="484" y="158">超时 / 明确错误提示</text>
+    <text x="484" y="176">返回原文 + usage + 错误</text>
+
+    <text x="704" y="122">先按 JSON 直接解析</text>
+    <text x="704" y="140">失败则抽代码块里的 JSON</text>
+    <text x="704" y="158">再失败请求一次格式修复</text>
+    <text x="704" y="176">仍失败：原文可读展示 + 兜底</text>
+
+    <text x="44" y="294">结构校验 + 字段键白名单</text>
+    <text x="44" y="312">类型校验（按字段 type）</text>
+    <text x="44" y="330">角色 ID 必须属于本世界</text>
+    <text x="44" y="348">static 字段的改动直接丢弃</text>
+
+    <text x="264" y="294">只写合法字段到 state.json</text>
+    <text x="264" y="312">custom_fields 动态键值</text>
+    <text x="264" y="330">无关字段保持原值不动</text>
+    <text x="264" y="348">choices 不足 4 项后端补齐</text>
+
+    <text x="484" y="294">timeline.jsonl 追加事件</text>
+    <text x="484" y="312">更新 summary.md 与本轮对话</text>
+    <text x="484" y="330">自动存档（整包快照）</text>
+    <text x="484" y="348">临时文件 + os.replace 原子替换</text>
+
+    <text x="704" y="294">小说正文 + 角色对话</text>
+    <text x="704" y="312">四个选项</text>
+    <text x="704" y="330">面板最新字段值</text>
+    <text x="704" y="348">当前存档信息</text>
+  </g>
+
+  <!-- arrows row 1 -->
+  <g stroke="#8A8F96" stroke-width="1.5" marker-end="url(#af)">
+    <line x1="229" y1="134" x2="249" y2="134"/><line x1="449" y1="134" x2="469" y2="134"/><line x1="669" y1="134" x2="689" y2="134"/>
+    <line x1="780" y1="191" x2="780" y2="248"/>
+  </g>
+  <!-- arrows row 2 (right to left) -->
+  <g stroke="#8A8F96" stroke-width="1.5" marker-end="url(#af)">
+    <line x1="691" y1="306" x2="671" y2="306"/><line x1="471" y1="306" x2="451" y2="306"/><line x1="251" y1="306" x2="231" y2="306"/>
+  </g>
+  <text x="792" y="222" font-size="10" fill="#6B6F76" transform="rotate(90 792 222)">顺序继续</text>
+
+  <!-- gates -->
+  <rect x="32" y="386" width="836" height="86" rx="9" fill="#F6EFEF" stroke="#D3A9A9" stroke-width="1.2"/>
+  <text x="46" y="409" font-size="13" font-weight="700" fill="#8A3B3B">三道校验关卡（失败不得污染正式数据）</text>
+  <g font-size="10.8" fill="#6E3A3A">
+    <text x="46" y="431">G1 · STEP 2：world_id 路径校验 + 上下文隔离，只装当前世界的设定、人物、记忆、字段定义，别的世界一个字都不进提示词。</text>
+    <text x="46" y="450">G2 · STEP 5：字段键必须存在于本世界 panels.yaml，类型必须匹配，角色 ID 必须属于本世界；非法项丢弃但不中断回合并记录原因。</text>
+    <text x="46" y="469">G3 · STEP 7：玩家行动先落盘再生成；模型格式失败也不会丢失已发生的玩家行为，原子写入避免半截文件。</text>
+  </g>
+
+  <rect x="32" y="486" width="836" height="52" rx="9" fill="#EDF6EE" stroke="#7FB98A" stroke-width="1.2"/>
+  <text x="46" y="508" font-size="12" font-weight="700" fill="#276B36">玩家自主权与可用性红线</text>
+  <text x="46" y="528" font-size="10.8" fill="#2F5C38">正文不得叙述玩家没有选择的关键动作；自定义输入框永远可用；四个选项是建议不是牢笼；LLM 不能修改 panels.yaml 的字段定义。</text>
+</svg>

@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" width="900" height="620" font-family="Microsoft YaHei, PingFang SC, Segoe UI, sans-serif">
+  <defs>
+    <marker id="ar" markerWidth="9" markerHeight="9" refX="4.5" refY="4.5" orient="auto">
+      <path d="M0,0 L9,4.5 L0,9 z" fill="#8A8F96"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="900" height="620" fill="#FBFAF7"/>
+  <text x="32" y="36" font-size="21" font-weight="700" fill="#22252A">StoryVerse · 分层架构</text>
+  <text x="32" y="57" font-size="12.5" fill="#6B6F76">【类型：结构图】展示模块分层与依赖方向，不表示执行顺序。执行顺序请看 turn_flow.svg 那张流程图。</text>
+
+  <!-- Layer 1: Frontend -->
+  <rect x="32" y="74" width="596" height="104" rx="10" fill="#EAF2FB" stroke="#7BA7D7" stroke-width="1.2"/>
+  <text x="48" y="99" font-size="14" font-weight="700" fill="#1B4F8C">① 前端层 · React + Vite + TypeScript（手机优先 / PWA）</text>
+  <g fill="#FFFFFF" stroke="#A9C8E8" font-size="11" >
+    <rect x="48"  y="110" width="90" height="25" rx="5"/><rect x="144" y="110" width="90" height="25" rx="5"/><rect x="240" y="110" width="90" height="25" rx="5"/>
+    <rect x="336" y="110" width="90" height="25" rx="5"/><rect x="432" y="110" width="90" height="25" rx="5"/><rect x="528" y="110" width="90" height="25" rx="5"/>
+    <rect x="48"  y="141" width="90" height="25" rx="5"/><rect x="144" y="141" width="90" height="25" rx="5"/><rect x="240" y="141" width="90" height="25" rx="5"/>
+    <rect x="336" y="141" width="90" height="25" rx="5"/><rect x="432" y="141" width="90" height="25" rx="5"/><rect x="528" y="141" width="90" height="25" rx="5"/>
+  </g>
+  <g fill="#22405F" font-size="10.5" text-anchor="middle">
+    <text x="93"  y="127">世界选择页</text><text x="189" y="127">游戏主页</text><text x="285" y="127">角色管理页</text>
+    <text x="381" y="127">Panel Designer</text><text x="477" y="127">Prompt Studio</text><text x="573" y="127">Settings</text>
+    <text x="93"  y="158">DynamicPanel</text><text x="189" y="158">FieldRenderer</text><text x="285" y="158">字段类型注册</text>
+    <text x="381" y="158">预览确认弹窗</text><text x="477" y="158">api.ts 服务层</text><text x="573" y="158">状态 hooks</text>
+  </g>
+
+  <!-- Layer 2: API -->
+  <rect x="32" y="196" width="596" height="86" rx="10" fill="#EDF6EE" stroke="#7FB98A" stroke-width="1.2"/>
+  <text x="48" y="220" font-size="14" font-weight="700" fill="#276B36">② API 层 · FastAPI 路由（只做参数校验与转发）</text>
+  <g fill="#FFFFFF" stroke="#A8D4B2" font-size="11">
+    <rect x="48"  y="232" width="78" height="27" rx="5"/><rect x="131" y="232" width="78" height="27" rx="5"/><rect x="214" y="232" width="78" height="27" rx="5"/>
+    <rect x="297" y="232" width="78" height="27" rx="5"/><rect x="380" y="232" width="78" height="27" rx="5"/><rect x="463" y="232" width="78" height="27" rx="5"/>
+    <rect x="546" y="232" width="72" height="27" rx="5"/>
+  </g>
+  <g fill="#26512F" font-size="10.5" text-anchor="middle">
+    <text x="87"  y="250">worlds</text><text x="170" y="250">characters</text><text x="253" y="250">story.turn</text>
+    <text x="336" y="250">saves</text><text x="419" y="250">prompts</text><text x="502" y="250">settings</text><text x="582" y="250">panels</text>
+  </g>
+
+  <!-- Layer 3: Core -->
+  <rect x="32" y="300" width="596" height="120" rx="10" fill="#F3EDFA" stroke="#A98BD0" stroke-width="1.2"/>
+  <text x="48" y="324" font-size="14" font-weight="700" fill="#5B3A8E">③ Core 服务层 · 唯一有权读写文件的层</text>
+  <g fill="#FFFFFF" stroke="#C9B4E4">
+    <rect x="48"  y="336" width="110" height="27" rx="5"/><rect x="164" y="336" width="110" height="27" rx="5"/><rect x="280" y="336" width="110" height="27" rx="5"/>
+    <rect x="396" y="336" width="110" height="27" rx="5"/><rect x="512" y="336" width="110" height="27" rx="5"/>
+    <rect x="48"  y="369" width="110" height="27" rx="5"/><rect x="164" y="369" width="110" height="27" rx="5"/><rect x="280" y="369" width="110" height="27" rx="5"/>
+    <rect x="396" y="369" width="110" height="27" rx="5"/><rect x="512" y="369" width="110" height="27" rx="5"/>
+  </g>
+  <g fill="#4A3273" font-size="10.5" text-anchor="middle">
+    <text x="103" y="354">WorldManager</text><text x="219" y="354">PromptBuilder</text><text x="335" y="354">StoryEngine</text>
+    <text x="451" y="354">Validator</text><text x="567" y="354">FieldRegistry</text>
+    <text x="103" y="387">PanelService</text><text x="219" y="387">StateManager</text><text x="335" y="387">MemoryManager</text>
+    <text x="451" y="387">SaveManager</text><text x="567" y="387">CharacterGen</text>
+  </g>
+
+  <!-- Layer 4: Storage -->
+  <rect x="32" y="438" width="596" height="124" rx="10" fill="#FBF1E6" stroke="#D6A96B" stroke-width="1.2"/>
+  <text x="48" y="462" font-size="14" font-weight="700" fill="#8A5A16">④ 存储层 · 本地文件系统（每个 world_id 一个独立目录）</text>
+  <g fill="#FFFFFF" stroke="#E4C99B">
+    <rect x="48"  y="474" width="188" height="72" rx="5"/><rect x="244" y="474" width="188" height="72" rx="5"/><rect x="440" y="474" width="178" height="72" rx="5"/>
+  </g>
+  <g fill="#6B4A1E" font-size="10.5">
+    <text x="58" y="492" font-weight="700">config/（全局）</text>
+    <text x="58" y="510">system_prompt.md</text><text x="58" y="526">prompts/*.md</text><text x="58" y="540">generation_config.yaml</text>
+    <text x="254" y="492" font-weight="700">worlds/{id}/（世界隔离）</text>
+    <text x="254" y="510">world.yaml · setting.md · rules.md</text><text x="254" y="526">ui/panels.yaml · characters/*.yaml</text><text x="254" y="540">state/current.json · saves/</text>
+    <text x="450" y="492" font-weight="700">memory/ 与 state/</text>
+    <text x="450" y="510">summary.md · timeline.jsonl</text><text x="450" y="526">profile.yaml · state.json</text><text x="450" y="540">relationships.json</text>
+  </g>
+
+  <!-- arrows between layers -->
+  <g stroke="#8A8F96" stroke-width="1.5" marker-end="url(#ar)">
+    <line x1="330" y1="179" x2="330" y2="194"/><line x1="330" y1="283" x2="330" y2="298"/><line x1="330" y1="421" x2="330" y2="436"/>
+  </g>
+
+  <!-- Right column -->
+  <rect x="650" y="74" width="218" height="150" rx="10" fill="#F0F4F7" stroke="#9AAFBE" stroke-width="1.2"/>
+  <text x="664" y="98" font-size="13.5" font-weight="700" fill="#2C4759">LLM Provider（独立模块）</text>
+  <g fill="#FFFFFF" stroke="#BFCFD9">
+    <rect x="664" y="108" width="190" height="26" rx="5"/><rect x="664" y="140" width="190" height="26" rx="5"/><rect x="664" y="172" width="190" height="26" rx="5"/>
+  </g>
+  <g fill="#31495A" font-size="10.5" text-anchor="middle">
+    <text x="759" y="125">OpenAI 兼容接口（KoboldCpp / LM Studio / Ollama）</text>
+    <text x="759" y="157">Mock Provider（默认开启，可跑完整流程）</text>
+    <text x="759" y="189">settings.yaml：Base URL / Model / Key / 参数</text>
+  </g>
+
+  <rect x="650" y="238" width="218" height="190" rx="10" fill="#F7F2EC" stroke="#C7B49B" stroke-width="1.2"/>
+  <text x="664" y="262" font-size="13.5" font-weight="700" fill="#6B4A28">Prompt 文件（每轮重新读盘）</text>
+  <g fill="#7A5C3A" font-size="10.5">
+    <text x="666" y="286">config/system_prompt.md</text>
+    <text x="666" y="308">prompts/story_generation.md</text>
+    <text x="666" y="330">prompts/npc_generator.md</text>
+    <text x="666" y="352">prompts/protagonist_generator.md</text>
+    <text x="666" y="374">prompts/memory_extractor.md</text>
+    <text x="666" y="396">prompts/field_backfill.md（新增）</text>
+  </g>
+  <text x="666" y="417" font-size="10" fill="#9A7B55">Prompt Studio 保存后下一轮立即生效</text>
+
+  <rect x="650" y="442" width="218" height="120" rx="10" fill="#F6EFEF" stroke="#D3A9A9" stroke-width="1.2"/>
+  <text x="664" y="466" font-size="13.5" font-weight="700" fill="#8A3B3B">安全边界</text>
+  <g fill="#6E3A3A" font-size="10.5">
+    <text x="666" y="489">· API Key 只在后端，不进日志与响应</text>
+    <text x="666" y="509">· 默认只监听 127.0.0.1</text>
+    <text x="666" y="529">· LAN 由独立脚本开启，不做公网映射</text>
+    <text x="666" y="549">· 所有写入走 os.replace 原子替换</text>
+  </g>
+
+  <text x="32" y="586" font-size="11.5" fill="#6B6F76">世界隔离边界：PromptBuilder 与全部文件读写只接收 world_id，统一经 WorldManager.resolve() 校验路径，禁止跨世界拼接数据或路径穿越。</text>
+  <text x="32" y="604" font-size="11.5" fill="#6B6F76">字段边界：panels.yaml 只有 PanelService 可改（用户通过 Panel Designer 触发）；LLM 每轮只能提交字段「值」，不能改字段「定义」。</text>
+</svg>

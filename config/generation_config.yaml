@@ -1,0 +1,54 @@
+# 生成参数与 Provider 默认值。
+# 注意：本文件只放「参数」，所有 Prompt 正文都在 config/*.md 里，绝不写在这里或 Python 源码里。
+
+llm:
+  # mock | openai_compatible
+  provider: mock
+  # 默认仅为常见本地推理服务的地址，业务逻辑不硬编码此值，可在 Settings 页面修改。
+  base_url: http://127.0.0.1:5001/v1
+  model: local-model
+  # API Key 只保存在后端（优先 config/settings.yaml），不会返回给前端，也不会写进日志。
+  api_key: ""
+  temperature: 0.85
+  # 世界观/人物扩写与「自定义 + AI 补全」都是长中文 JSON，预算太小会被截成半个对象。
+  # 本文件是默认模板；实际运行值优先读 config/settings.yaml，Settings 页可随时调整。
+  #
+  # 【重要：改这个数字前先看模型服务】llama-server 的 -c 是「输入 + 输出」总窗口，
+  # 必须大于「提示词 token + max_tokens」。配置是每次请求实时读盘、立即生效，
+  # 而 -c 只有重启模型服务才生效；若没重启就把这里调大，服务端会从左侧截断
+  # prompt，正好切掉最前面的全局铁律。正确顺序：
+  #   1) 按你所用推理服务的文档重启模型服务，让上下文窗口 -c 生效；
+  #   2) 再到 Settings 页把 Max Tokens 调成 16384。
+  # 补全任务另有一道 12288 的硬上限（实际需求约 2500–4300 token，防止 RP 模型一路写满）。
+  max_tokens: 16384
+  timeout_seconds: 420
+  # 默认开启，保证不接模型时也能完整体验 UI 与游戏流程。
+  mock_mode: true
+
+story:
+  # 每轮只带最近 8-10 轮互动，配合摘要与时间线，避免把全部历史永久塞进提示词。
+  history_turns: 9
+  # 模型返回选项不足四个时，由后端从这里补齐；模棱两可时也可由玩家自定义输入。
+  fallback_choices:
+    - 静静观察，暂不表态
+    - 换一个话题，试探对方反应
+    - 直接询问眼下最在意的事
+    - 先离开此地，整理思绪
+  # 模型输出非法时最多请求一次「格式修复」，仍失败则展示原文并走安全兜底。
+  repair_attempts: 1
+
+memory:
+  # 剧情摘要的最大字符数，超出时由 MemoryManager 做保守截断。
+  summary_max_chars: 4000
+  # 每轮最多接受多少条重要事件，防止模型刷屏污染时间线。
+  max_memory_candidates_per_turn: 3
+
+field_system:
+  # 定期校准的兜底轮数。取 8 是为了和 history_turns 对齐：
+  # 校准时可以直接复用刚拼好的最近上下文，不必额外翻历史，也不容易串世界。
+  # 设为 0 表示关闭定期校准，只保留事件触发（新增字段、读档、切世界、手动点击）。
+  field_reconcile_every: 8
+  # 字段建议攒够几条才亮角标，避免每轮打扰玩家。
+  suggestion_notify_threshold: 3
+  # 距上次提示至少隔多少轮，防止同一批建议反复提醒。
+  suggestion_notify_every_turns: 10

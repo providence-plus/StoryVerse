@@ -1,0 +1,222 @@
+:root {
+  --paper: #f7f4ec;
+  --paper-deep: #f1ece0;
+  --surface: #fffdf8;
+  --ink: #26241f;
+  --ink-soft: #5c574d;
+  --ink-faint: #8b867a;
+  --line: #e3ddcf;
+  --line-strong: #cfc6b2;
+  --accent: #8a6a3c;
+  --accent-soft: #f0e7d6;
+  --danger: #a8443c;
+  --danger-soft: #f8ebe9;
+  --ok: #3f7049;
+  --radius: 12px;
+  font-family: "Noto Serif SC", "Songti SC", "SimSun", Georgia, serif;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+* { box-sizing: border-box; }
+html, body, #root { min-height: 100%; margin: 0; }
+body { overflow-x: hidden; background: var(--paper); -webkit-text-size-adjust: 100%; }
+button, input, textarea, select { font-family: inherit; font-size: inherit; color: inherit; }
+button { cursor: pointer; }
+h1, h2, h3, p { margin: 0; }
+
+.app-shell { min-height: 100vh; display: flex; flex-direction: column; }
+
+.top-bar {
+  display: flex; align-items: center; gap: 18px;
+  padding: 10px 18px; border-bottom: 1px solid var(--line);
+  background: rgba(255, 253, 248, 0.94); position: sticky; top: 0; z-index: 20;
+  min-width: 0;
+}
+.brand {
+  display: flex; align-items: center; gap: 8px; flex-shrink: 0;
+  background: none; border: 0; padding: 4px 0;
+  font-size: 16px; font-weight: 600; letter-spacing: 0.06em; color: var(--accent);
+}
+.top-nav { display: flex; gap: 4px; overflow-x: auto; min-width: 0; scrollbar-width: none; }
+.top-nav::-webkit-scrollbar { display: none; }
+.nav-item {
+  display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
+  padding: 7px 11px; border: 1px solid transparent; border-radius: 8px;
+  background: none; color: var(--ink-soft); font-size: 13px;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+.nav-item:hover { background: var(--paper-deep); }
+.nav-item.active { background: var(--accent-soft); border-color: var(--line-strong); color: var(--accent); }
+
+.page-area { flex: 1; width: 100%; max-width: 1180px; margin: 0 auto; padding: 22px 16px 40px; min-width: 0; }
+.page-header { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
+.page-title { font-size: 25px; line-height: 1.35; letter-spacing: 0.02em; }
+.page-sub { font-size: 13px; color: var(--ink-faint); margin-top: 6px; font-family: "PingFang SC", "Microsoft YaHei", sans-serif; }
+.section-title { font-size: 16px; margin: 22px 0 12px; letter-spacing: 0.04em; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 9px 15px; border-radius: 9px; border: 1px solid var(--line-strong);
+  background: var(--surface); color: var(--ink); font-size: 13px;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif; transition: background .15s;
+}
+.btn:hover { background: var(--paper-deep); }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+.btn-primary { background: var(--accent); border-color: var(--accent); color: #fffdf8; }
+.btn-primary:hover { background: #75592f; }
+.btn-ghost { background: transparent; border-color: transparent; color: var(--ink-soft); }
+.btn-ghost:hover { background: var(--paper-deep); }
+.btn-danger { color: var(--danger); border-color: #e6c9c5; background: var(--danger-soft); }
+.btn-sm { padding: 5px 10px; font-size: 12px; }
+.btn-row { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.input, .textarea, .select {
+  width: 100%; padding: 9px 11px; border: 1px solid var(--line-strong);
+  border-radius: 8px; background: var(--surface); outline: none; font-size: 14px;
+}
+.input:focus, .textarea:focus, .select:focus { border-color: var(--accent); }
+.textarea { resize: vertical; min-height: 92px; line-height: 1.7; }
+.field-hint { font-size: 11.5px; color: var(--ink-faint); margin-top: 4px; line-height: 1.5;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif; }
+.form-row { display: grid; gap: 12px; margin-bottom: 12px; }
+@media (min-width: 720px) { .form-row.two { grid-template-columns: 1fr 1fr; } }
+
+.card {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 18px; min-width: 0;
+}
+.chip {
+  display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px;
+  border-radius: 999px; background: var(--accent-soft); color: var(--accent);
+  font-size: 11.5px; font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+.chip.plain { background: var(--paper-deep); color: var(--ink-soft); }
+
+.error-banner, .notice {
+  padding: 11px 14px; border-radius: 9px; margin-bottom: 14px; font-size: 13px;
+  line-height: 1.6; font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+.error-banner { background: var(--danger-soft); border: 1px solid #e6c9c5; color: var(--danger); }
+.notice { background: var(--accent-soft); border: 1px solid var(--line-strong); color: var(--ink-soft); }
+.empty { color: var(--ink-faint); font-size: 13px; padding: 18px 0; }
+
+/* 世界选择 */
+.world-grid { display: grid; gap: 14px; grid-template-columns: 1fr; }
+@media (min-width: 680px) { .world-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .world-grid { grid-template-columns: repeat(3, 1fr); } }
+.world-card { display: flex; flex-direction: column; gap: 10px; min-height: 176px; }
+.world-card h3 { font-size: 19px; }
+.world-card .desc { font-size: 13px; color: var(--ink-soft); line-height: 1.7; flex: 1; }
+.world-card .meta { display: flex; flex-wrap: wrap; gap: 6px; }
+.world-card .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* 游戏主页 */
+.game-layout { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); align-items: start; }
+@media (min-width: 960px) {
+  .game-layout { grid-template-columns: minmax(0, 1fr) 300px; }
+  .side-column { position: sticky; top: 66px; }
+}
+.story-column, .side-column { min-width: 0; display: flex; flex-direction: column; gap: 14px; }
+.story-header {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 8px; padding-bottom: 12px; border-bottom: 1px solid var(--line);
+}
+.story-header h2 { font-size: 20px; }
+.story-header .loc { font-size: 12.5px; color: var(--ink-faint); }
+.narration {
+  font-size: 16px; line-height: 2.05; letter-spacing: 0.015em;
+  white-space: pre-wrap; word-break: break-word; padding: 4px 0 10px;
+}
+.narration p { margin-bottom: 12px; }
+.dialogue-list { display: flex; flex-direction: column; gap: 8px; margin: 6px 0 14px; }
+.dialogue {
+  border-left: 2px solid var(--accent); padding: 6px 0 6px 12px;
+  font-size: 14.5px; line-height: 1.8; background: linear-gradient(90deg, var(--accent-soft), transparent 70%);
+}
+.dialogue .who { font-size: 11.5px; color: var(--accent); margin-right: 8px;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif; }
+
+.choice-list { display: grid; gap: 9px; grid-template-columns: 1fr; }
+@media (min-width: 620px) { .choice-list { grid-template-columns: repeat(2, 1fr); } }
+.choice-btn {
+  display: flex; align-items: flex-start; gap: 10px; text-align: left;
+  padding: 12px 14px; min-height: 52px; border: 1px solid var(--line-strong);
+  border-radius: 10px; background: var(--surface); line-height: 1.6; font-size: 14px;
+}
+.choice-btn:hover:not(:disabled) { border-color: var(--accent); background: var(--accent-soft); }
+.choice-btn .letter { color: var(--accent); font-weight: 600; flex-shrink: 0; }
+
+.composer {
+  position: sticky; bottom: 0; z-index: 10; margin-top: 4px;
+  padding: 12px 0 6px; background: linear-gradient(to bottom, rgba(247,244,236,0), var(--paper) 22%);
+}
+.composer-inner { display: flex; gap: 8px; align-items: flex-end; }
+.composer .textarea { min-height: 48px; max-height: 130px; flex: 1; min-width: 0; }
+
+/* 人物面板 */
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+.panel-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 11px 14px; border-bottom: 1px solid var(--line); }
+.panel-head h3 { font-size: 14.5px; font-weight: 600; }
+.panel-head .controls { display: flex; gap: 2px; }
+.icon-btn { display: inline-flex; align-items: center; justify-content: center; width: 27px; height: 27px;
+  border: 0; border-radius: 6px; background: none; color: var(--ink-faint); }
+.icon-btn:hover { background: var(--paper-deep); color: var(--ink); }
+.panel-body { padding: 6px 14px 14px; }
+.field-row { padding: 9px 0; border-bottom: 1px dashed var(--line); }
+.field-row:last-child { border-bottom: 0; }
+.field-label { font-size: 11.5px; color: var(--ink-faint); margin-bottom: 3px;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif; }
+.field-value { font-size: 13.5px; line-height: 1.65; word-break: break-word; white-space: pre-wrap; }
+.field-value.editable { cursor: pointer; }
+.tag { display: inline-block; padding: 2px 8px; margin: 2px 4px 2px 0; border-radius: 5px;
+  background: var(--paper-deep); font-size: 12px; }
+.panel-hidden { display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  padding: 10px 14px; border: 1px dashed var(--line-strong); border-radius: 10px;
+  color: var(--ink-faint); font-size: 12.5px; }
+
+/* Panel Designer / 角色页 */
+.tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+.tab { padding: 7px 13px; border: 1px solid var(--line-strong); border-radius: 8px;
+  background: var(--surface); font-size: 13px; }
+.tab.active { background: var(--accent); border-color: var(--accent); color: #fffdf8; }
+.split { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); align-items: start; }
+@media (min-width: 940px) { .split { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.field-editor { border: 1px solid var(--line); border-radius: 10px; padding: 12px; margin-bottom: 10px; background: var(--surface); }
+.field-editor .head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 10px; }
+.field-editor .head strong { font-size: 13.5px; }
+.editor-grid { display: grid; gap: 8px; grid-template-columns: 1fr 1fr; }
+.editor-grid .wide { grid-column: 1 / -1; }
+.editor-grid label { font-size: 11.5px; color: var(--ink-faint); display: block; margin-bottom: 3px;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif; }
+.character-row { display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: 11px 0; border-bottom: 1px dashed var(--line); }
+.character-row:last-child { border: 0; }
+.preview-card { border: 1px solid var(--line-strong); border-radius: 10px; padding: 14px; margin-bottom: 12px; }
+
+/* 建议角标 */
+.suggestion-badge { position: relative; }
+.suggestion-badge .dot { position: absolute; top: -5px; right: -5px; min-width: 17px; height: 17px;
+  border-radius: 9px; background: var(--danger); color: #fff; font-size: 10px;
+  display: flex; align-items: center; justify-content: center; padding: 0 4px; }
+.suggestion-item { padding: 11px 0; border-bottom: 1px dashed var(--line); }
+.suggestion-item:last-child { border: 0; }
+
+/* Prompt Studio / Settings */
+.studio { display: grid; gap: 14px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 860px) { .studio { grid-template-columns: 220px minmax(0, 1fr); } }
+.prompt-list { display: flex; flex-direction: column; gap: 5px; }
+.prompt-list button { text-align: left; padding: 9px 11px; border: 1px solid transparent;
+  border-radius: 8px; background: none; font-size: 13px; }
+.prompt-list button.active { background: var(--accent-soft); border-color: var(--line-strong); color: var(--accent); }
+.code-editor { width: 100%; min-height: 54vh; padding: 14px; border: 1px solid var(--line-strong);
+  border-radius: 10px; background: var(--surface); font-family: "Cascadia Mono", Consolas, monospace;
+  font-size: 13px; line-height: 1.75; resize: vertical; outline: none; }
+.setting-row { display: grid; gap: 6px; padding: 12px 0; border-bottom: 1px dashed var(--line); }
+.setting-row:last-child { border: 0; }
+.setting-row label { font-size: 13.5px; }
+.switch-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 0; }
+.history-item { padding: 12px 0; border-bottom: 1px dashed var(--line); font-size: 13.5px; line-height: 1.8; }
+.history-item:last-child { border: 0; }
+.history-item .action { color: var(--accent); font-size: 12.5px; }
+.loading { text-align: center; color: var(--ink-faint); padding: 26px; font-size: 13px; }
